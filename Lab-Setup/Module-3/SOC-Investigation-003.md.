@@ -1,0 +1,24 @@
+# Module 3 — SOC Investigation 003
+
+## Windows Application Compatibility Activity
+
+**Host:** SOC-WIN11  
+**Event Source:** Sysmon  
+**Windows Event ID:** 1 — Process Creation  
+**Executable:** `C:\Windows\System32\sdbinst.exe`  
+**Command Line:** `C:\WINDOWS\System32\sdbinst.exe -m -bg`  
+**Parent Process:** `C:\Windows\System32\svchost.exe`  
+**Parent Service:** `PcaSvc` — Program Compatibility Assistant  
+**User:** `NT AUTHORITY\SYSTEM`
+
+### Investigation
+Sysmon recorded the execution of `sdbinst.exe`, a Windows Application Compatibility utility. The parent process was `svchost.exe`, running the `PcaSvc` service.
+
+### Assessment
+The process chain is consistent with Windows application-compatibility activity. This is a plausible benign explanation, but the specific compatibility database and reason for execution have not been verified.
+
+### Disposition
+**Status:** Investigated; likely routine Windows activity, but not fully confirmed. No clear evidence of malicious activity was identified in the fields reviewed.
+
+### Learning Point
+Process investigations should consider the executable, command line, parent process, service and user account together. A legitimate Windows executable should not be classified as safe or malicious based on its name alone.
